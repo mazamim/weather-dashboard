@@ -28,57 +28,26 @@
         <div class="row">
           <div class="col-md-4">
  
-           <form class="d-flex py-2">
-             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-             <button id="search" class="btn btn-outline-success" type="submit">Search</button>
+           <form class="d-flex py-2" id="search-form">
+             <input id="cityInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+             <button class="btn btn-outline-success" type="submit">Search</button>
            </form>
-           <ul class="list-group">
-             <li class="list-group-item d-flex justify-content-between align-items-center">
-               A list item
-               <span class="badge bg-primary rounded-pill">14</span>
-             </li>
-             <li class="list-group-item d-flex justify-content-between align-items-center">
-               A second list item
-               <span class="badge bg-primary rounded-pill">2</span>
-             </li>
-             <li class="list-group-item d-flex justify-content-between align-items-center">
-               A third list item
-               <span class="badge bg-primary rounded-pill">1</span>
-             </li>
-             <li class="list-group-item d-flex justify-content-between align-items-center">
-               A list item
-               <span class="badge bg-primary rounded-pill">14</span>
-             </li>
-             <li class="list-group-item d-flex justify-content-between align-items-center">
-               A second list item
-               <span class="badge bg-primary rounded-pill">2</span>
-             </li>
-             <li class="list-group-item d-flex justify-content-between align-items-center">
-               A third list item
-               <span class="badge bg-primary rounded-pill">1</span>
-             </li>
-             <li class="list-group-item d-flex justify-content-between align-items-center">
-               A list item
-               <span class="badge bg-primary rounded-pill">14</span>
-             </li>
-             <li class="list-group-item d-flex justify-content-between align-items-center">
-               A second list item
-               <span class="badge bg-primary rounded-pill">2</span>
-             </li>
-             <li class="list-group-item d-flex justify-content-between align-items-center">
-               A third list item
-               <span class="badge bg-primary rounded-pill">1</span>
-             </li>
+           <ul id="citylistItem" class="list-group">
+
+      
+         
+         
            </ul>
            
           </div>
           <div class="col-md-8">
             <div class="container py-2" id="container-right">
               <h5 id="place"></h5>
-              <p>Temperature: <span id="temp"></span>&#8451;</p>
+              Temperature: <span id="temp"></span>&#8451;<img src='http://openweathermap.org/img/wn/10d@2x.png' style="width: 50px;"/><small id="c-description"></small>
                 <p>Humidity: <span id="humidity"></span>%</p>
                   <p>Wind Speed: <span id="wind"></span> MPH</p>
                     <p>UV Index: <span id="uv"></p>
+     
 
             </div>
             <div class="container py-3">
