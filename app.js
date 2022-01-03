@@ -1,5 +1,4 @@
 var APIKey = "74a890a0f12a5124adefffcd98b7cd98";
-var isLoadedCity=false;
 var h1Place = document.querySelector("#place")
 var temp = document.querySelector("#temp")
 var humidity = document.querySelector("#humidity")
@@ -17,7 +16,8 @@ var currentCity;
 
 $(window).on('load', function() {
  
-//get geo locaTION BY DEFAUlt
+//get current geo location using window.navigator function which will return coordinates objects
+//using this another function will convert those to a city name using google api eg-geoToAddress(x,y) will get cityz
 getGeoLocation()
 
 
@@ -30,11 +30,11 @@ for (i = 0; i < window.localStorage.length; i++) {
     }
 }
 
-console.log(cityList)
 
 
 
-async function getGeoLocation(){
+//function to get geo location using 
+ function getGeoLocation(){
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position)=>{
         // loadIni(position.coords.latitude,position.coords.longitude)
@@ -65,7 +65,7 @@ function geoToAddress(lat,lon){
           if (data.results[0].address_components[i].types[b] == "locality") { 
             //this is the object you are looking for 
             city= data.results[0].address_components[i]; 
-            isLoadedCity=true
+         
             break; 
         } 
 
@@ -100,29 +100,31 @@ function geoToAddress(lat,lon){
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-//check you have address
-
+//check wether you have address.. required to wait till google api recieved a results
+//below functikon is just to wait.....
 function getCurrentCity () {
   
 
   if (currentCity != null) {
-    console.log('i have city')
+   // console.log('i have city')
 
     loadIni(currentGeo.coords.latitude,currentGeo.coords.longitude)
 
 
   } else {
-    console.log('i need to wait')
+   // console.log('i need to wait')
     setTimeout(getCurrentCity, 300); // try again in 300 milliseconds
   }
 }
 
 getCurrentCity();
 
-
+//this below function will recieve  coordinates as parameter 
+// l check local storage if any data related to
+//if found will load from there else l call api
 
   function loadIni(lat,lon){
-  // geoToAddress(lat, lon)
+
 
 var local= JSON.parse(localStorage.getItem(currentCity.toLowerCase()+"-weather-data"));
     // check from local storage
@@ -139,22 +141,24 @@ var local= JSON.parse(localStorage.getItem(currentCity.toLowerCase()+"-weather-d
     }
     if (local!=null && date1 === date2){
   
-      console.log("display data from Local Storage")
+      // console.log("display data from Local Storage")
+      alertify.message('Data from local storage');
            display(local)
            displayForecast(local.daily)
     }
   
     else{
   
-      console.log("display data from server")
+    
 
   fetch('https://api.openweathermap.org/data/2.5/onecall?lat='+lat+'&lon='+lon+'&exclude=minutely,hourly,alerts&units=metric&appid='+APIKey)
     .then(function (response) {
       if (response.ok) {
+        alertify.success('Connected to Saver');
        response.json().then(function (data) {
      if (data !=null){
 
-      console.log(data)
+  
          
                display(data)
                displayForecast(data.daily)
@@ -164,11 +168,11 @@ var local= JSON.parse(localStorage.getItem(currentCity.toLowerCase()+"-weather-d
         });
   
       } else {
-        alert('Error: ' + response.statusText);
+        alertify.error('Error message'+ response.statusText);
       }
     })
     .catch(function (error) {
-      alert('Unable to connect to weather API');
+      alertify.error('Unable to connect to weather API');
     });
   
 
@@ -181,7 +185,7 @@ var local= JSON.parse(localStorage.getItem(currentCity.toLowerCase()+"-weather-d
 
 
 }
-
+//function to display current weather 
 function display(data){
   if (data!=null){
 
@@ -197,7 +201,7 @@ function display(data){
 
  }
 
-
+//this function is to fet feo codes from address
 function addressToGeoCode(city){
 var url ='https://maps.googleapis.com/maps/api/geocode/json?address='+city+'&key=AIzaSyBi2s5puIfi0U5S0NRdR4NiprHdtQf2JFA'
 var geo;
@@ -256,7 +260,7 @@ fetch(url)
 
   }
 
-
+// create elements cards
   function createElements(cardheader,temp,humidity,weather){
 
 
@@ -325,10 +329,7 @@ cardBody.appendChild(img)
   
 function formSubmitHandler(event) {
   event.preventDefault();
-  //remove cards
-  //element.parentNode.removeChild(element);
-
-  removeElements()
+    removeElements()
 
 
   var cityname = cityInput.value.trim();
