@@ -270,8 +270,8 @@ fetch(url)
 
 //   <div class="card text-white bg-primary mb-3" style="max-width: 8rem;">
 const outerDiv=document.createElement('div')
-    outerDiv.classList.add('card' ,'text-white' ,'bg-primary' ,'mb-3')
-    outerDiv.setAttribute("style","max-width: 10rem;")
+    outerDiv.classList.add('card' ,'text-white', 'text-center','bg-primary' ,'mb-3','me-1')
+   // outerDiv.setAttribute("style","max-width: 10rem;")
     parentDiv.appendChild(outerDiv);       
 //   <div class="card-header">25/12/2021</div>
 const cardHeader=document.createElement('div')

@@ -17,4 +17,49 @@ ul li:hover{
 
 
 
+@media only screen and (min-width: 993px){
+   #parentDiv{
+       display: flex;
+       flex-direction: row;
+
+}
+ 
+}
+
+
+
+
+/* #parentDiv{
+
+} */
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+
+    /* #parentDiv{
+  
+        display: flex;
+       justify-content: space-between;
+    } */
+
+}
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    #parentDiv{
+  
+        display: flex;
+       justify-content: space-between;
+    }
+
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 953px) {
+    #parentDiv{
+  
+    
+       justify-content: space-between;
+    }
+
+}
 
