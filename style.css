@@ -2,8 +2,12 @@ nav h2{
     margin: 0 auto;
 }
 
-p:first-letter {
+p:first-letter{
     text-transform:capitalize;
+}
+
+ul li a:first-letter{
+    text-transform:capitalize; 
 }
 
 ul li:hover{
